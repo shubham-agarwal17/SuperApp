@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt.android)
@@ -7,17 +7,14 @@ plugins {
 }
 
 android {
-    namespace = "com.shubham.superapp"
+    namespace = "com.shubham.crypto"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.shubham.superapp"
         minSdk = 24
-        targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -51,18 +48,11 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 }
 
 dependencies {
-
-    implementation(project(":utilities"))
     implementation(project(":design"))
-    implementation(project(":crypto"))
+    implementation(project(":utilities"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -72,6 +62,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.runtime.livedata)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -86,8 +77,20 @@ dependencies {
     ksp(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 
-    implementation(libs.splash.screen)
+    implementation(libs.lottie)
+
+    // Retrofit
+    implementation(libs.retrofit2.retrofit)
+
+    // Gson converter
+    implementation(libs.converter.gson)
+
+    // Coil
     implementation(libs.coil.compose)
     implementation(libs.coil.network)
-    implementation(libs.lottie)
+
+    // Room
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
 }

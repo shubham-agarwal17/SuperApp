@@ -39,7 +39,7 @@ fun HomeScreen(
                 .padding(innerPadding)
         ) {
             BannerComponent(
-                title = stringResource(R.string.wealth),
+                title = stringResource(R.string.crypto),
                 description = stringResource(R.string.investment_ideas_for_you),
                 imageUrl = null,
                 resourceValue = R.drawable.ic_wealth,

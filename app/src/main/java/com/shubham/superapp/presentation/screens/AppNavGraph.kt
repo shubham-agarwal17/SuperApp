@@ -11,8 +11,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.shubham.superapp.presentation.screens.home.HomeScreen
 import com.shubham.superapp.presentation.screens.userprofile.UserProfileScreen
-import com.shubham.wealth.presentation.screens.WealthDetailScreen
-import com.shubham.wealth.presentation.screens.WealthHomeScreen
+import com.shubham.crypto.presentation.screens.CryptoDetailScreen
+import com.shubham.crypto.presentation.screens.CryptoHomeScreen
 
 @Composable
 fun AppNavGraph() {
@@ -29,7 +29,7 @@ fun AppNavGraph() {
                         navController.navigate(Screen.UserProfileScreen.route)
                     },
                     wealthBannerClicked = {
-                        navController.navigate(Screen.WealthHomeScreen.route)
+                        navController.navigate(Screen.CryptoHomeScreen.route)
                     }
                 )
             }
@@ -42,24 +42,24 @@ fun AppNavGraph() {
                 )
             }
 
-            composable(route = Screen.WealthHomeScreen.route) {
-                WealthHomeScreen(
+            composable(route = Screen.CryptoHomeScreen.route) {
+                CryptoHomeScreen(
                     primaryButtonClicked = {
                         navController.popBackStack()
                     },
                     cardClicked = { coinId ->
-                        navController.navigate(Screen.WealthDetailScreen.route + "/$coinId")
+                        navController.navigate(Screen.CryptoDetailScreen.route + "/$coinId")
                     }
                 )
             }
 
             composable(
-                route = Screen.WealthDetailScreen.route + "/{coinId}",
+                route = Screen.CryptoDetailScreen.route + "/{coinId}",
                 arguments = listOf(navArgument("coinId") { type = NavType.StringType })
             ) { backStackEntry ->
                 val coinId = backStackEntry.arguments?.getString("coinId")!!
-                WealthDetailScreen(
-                    coinId = coinId,
+                CryptoDetailScreen(
+                    cryptoId = coinId,
                     primaryButtonClicked = {
                         navController.popBackStack()
                     }
